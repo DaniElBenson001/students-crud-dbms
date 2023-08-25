@@ -1,5 +1,4 @@
 //CRUD OPERATIONS USING FETCH API
-
 //Getting all Students into the table
 //---------------------------------------
 fetch('https://localhost:7007/api/Students/getstudentdb').then((data) => {
@@ -11,7 +10,7 @@ fetch('https://localhost:7007/api/Students/getstudentdb').then((data) => {
     objectData.map((values) => {
         tableData += `<tr>
         <td>${values.firstName}</td>
-        <td>${values.middileName}</td>
+        <td>${values.middleName}</td>
         <td>${values.lastName}</td>
         <td>${values.department}</td>
         <td>2023-HA-${values.id}</td>
@@ -33,6 +32,8 @@ fetch('https://localhost:7007/api/Students/getstudentdb').then((data) => {
     });
     document.getElementById("tableBody").innerHTML = tableData;
 });
+
+
 //Getting the value of the list of added or admitted students and sending to the Admitted Students Card
 fetch('https://localhost:7007/api/Students/getstudentdb').then((data) => {
     return data.json();
@@ -41,21 +42,31 @@ fetch('https://localhost:7007/api/Students/getstudentdb').then((data) => {
     return document.getElementById("admittedStudents").innerHTML = admittedStudents;
 });
 
+
+//Getting the value of the list of DELETED students and sending to the Deleted Students Card
+fetch('https://localhost:7007/api/Students/getDeletedstudentdb').then((data) => {
+    return data.json();
+}).then((objData) => {
+    let admittedStudents = objData.length;
+    return document.getElementById("deletedStudents").innerHTML = admittedStudents;
+});
+
+
 //Adding a New Student
 //----------------------------
 // Function to collect the Input Values in the form
 function getAddStudentInputValues(){
     return{
         firstName:document.getElementById('firstName').value,
-        middileName: document.getElementById('midName').value,
+        middleName: document.getElementById('midName').value,
         lastName: document.getElementById('lastName').value,
         department: document.getElementById('department').value
     }
 }
 
+
 //Adding a New Student with the Fetch API
 const form = document.getElementById('submitBtn');
-
 
 let buttonIsClicked = false;
 form.addEventListener('click', (e) =>{
@@ -81,13 +92,13 @@ form.addEventListener('click', (e) =>{
 
     //Toastr Notification for an added student
     $(function(){
-        toastr.success(`${document.getElementById('firstName').value} added Successfully, Kindly press the close button`, "Activated", {timeOut: 5000});
+        toastr.success(`${document.getElementById('firstName').value} added Successfully, Kindly press the close button`, "Added Student", {timeOut: 5000});
         toastr.options = {
             "closeButton": true,
             "debug": false,
             "newestOnTop": false,
             "progressBar": false,
-            "positionClass": "toast-top-right",
+            "positionClass": "toast-bottom-right",
             "preventDuplicates": false,
             "onclick": null,
             "showDuration": "300",
@@ -124,7 +135,7 @@ form.addEventListener("mouseleave", () =>{
 let dataisDeleted = false;
 function deleteStudent(studentId) {
     fetch(`https://localhost:7007/api/Students/deletestudent?id=${studentId}`, {
-        method: "DELETE",
+        method: "GET",
     })
     .then((res) => res.json())
     .then(data => {
@@ -143,10 +154,10 @@ function deleteStudent(studentId) {
     if(dataisDeleted = true){
         alert("This Student will be deleted!")
     }
-    
+
     //Toastr Notification for a newly deleted student
     $(function(){
-        toastr["success"](`Student deleted Successfully, Kindly press the close button`, "Activated")
+        toastr["error"](`Student deleted Successfully, Kindly press the close button`, "Deleted Student")
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -165,7 +176,7 @@ function deleteStudent(studentId) {
             "hideMethod": "fadeOut"
         }
     });
-    
+
     setTimeout(reFresh, 5000)
 
 }
@@ -175,6 +186,8 @@ function editStudent(studentId){
     fetch(`https://localhost:7007/api/Students/getstudentbyid?id=${studentId}`)
     .then((res) => res.json())
     .then((data) =>{
+        console.log(data)
+
         document.getElementById('firstName').value = data.firstName;
         document.getElementById('midName').value = data.middleName;
         document.getElementById('lastName').value = data.lastName;
