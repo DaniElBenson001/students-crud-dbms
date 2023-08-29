@@ -158,7 +158,7 @@ function deleteStudent(studentId) {
 
     //Toastr Notification for a newly deleted student
     $(function(){
-        toastr["error"](`Student deleted Successfully, Kindly press the close button`, "Deleted Student")
+        toastr["success"](`Student deleted Successfully, Kindly press the close button`, "Deleted Student")
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -231,9 +231,9 @@ const editForm = document.getElementById('saveEditBtn');
 let EditButtonIsClicked = false;
 
 editForm.addEventListener('click', (e) => {
-    buttonIsClicked = true;
-    form.style.cursor = "not-allowed";
-    form.disabled = true;
+    EditButtonIsClickedbuttonIsClicked = true;
+    editForm.style.cursor = "not-allowed";
+    editForm.disabled = true;
 
     var data = getnewData();
     console.log(data);
@@ -261,7 +261,7 @@ editForm.addEventListener('click', (e) => {
     e.preventDefault();
 
     $(function(){
-        toastr['info'](`Student edited Successfully, Kindly press the close button`, "Added Student", {timeOut: 5000});
+        toastr['success'](`Student edited Successfully, Kindly press the close button`, "Edited Student", {timeOut: 5000});
         toastr.options = {
             "closeButton": true,
             "debug": false,
