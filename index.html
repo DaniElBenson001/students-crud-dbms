@@ -103,6 +103,7 @@
                         <option value="Political Science">Political Science</option>
                         <option value="English">English</option>
                         <option value="Statistics">Statistics</option>
+                        <option value="Mass Communication">Mass Communication</option>
                     </select> <br>
                     <input type="submit" value="Add Student" id="submitBtn" class="addStudentAction"> <br>
                     <div class="close">Close Form</div>
@@ -120,18 +121,9 @@
                   <input class="formInput" type="text" id="editMidName" placeholder="Enter Middle Name Here" name="middleName"> <br>
                   <label for="lastName">Last Name</label> <br>
                   <input class="formInput" type="text"id="editLastName" placeholder="Enter Last Name" name="lastName"> <br>
-                  <label for="department">Select Department</label> <br>
-                  <select class = "formSelect" name="department" id="editDepartment">
-                      <option value="Select">Select</option>
-                      <option value="Computer Science">Computer Science</option>
-                      <option value="Criminology">Criminology</option>
-                      <option value="Political Science">Political Science</option>
-                      <option value="English">English</option>
-                      <option value="Statistics">Statistics</option>
-                  </select> <br>
-                  <input type="submit" value="Edit Student" id="editBtn" class="editStudent"> <br>
-                  <div class="close" onclick="closeModal()">close form</div>
-              </form>
+                  <input type="submit" value="Edit Student" id="saveEditBtn" class="editStudent"> <br>
+                  <div id="closeEditForm">Close Form</div>
+                </form>
           </div>
       </div>
 
